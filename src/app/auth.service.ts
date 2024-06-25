@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+//  import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+
 
 interface User {
   id?: number;
@@ -28,6 +30,10 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<User[]> {
+    if(username === '' || password === '') {
+      return of ([])
+    }
+
     return this.http.get<User[]>(`${this.apiUrl}?username=${username}&password=${password}`);
   }
 
