@@ -1,0 +1,43 @@
+/* Styles for Home Page Component */
+
+.home-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f0f8ff; /* Light blue */
+    border: 1px solid #b0e0e6; /* Light steel blue */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .home-container h2 {
+    font-size: 2.5rem;
+    color: #4169e1; /* Royal blue */
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .home-container p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .home-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .home-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  
