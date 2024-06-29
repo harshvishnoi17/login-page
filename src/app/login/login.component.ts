@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
-import { NgHttpLoaderModule, Spinkit } from 'ng-http-loader';
 
 
 @Component({
@@ -21,7 +20,7 @@ export class LoginComponent {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  public spinkit = Spinkit; 
+
 
   loginForm: FormGroup;
   loading = false;
