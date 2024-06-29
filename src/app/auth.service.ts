@@ -7,16 +7,17 @@ import { Observable, throwError, of } from 'rxjs';
 
 
 interface User {
-  id?: number;
-  username: string;
+  name?: number;
+  email: string;
   password: string;
+  photoUrl: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = 'https://api.escuelajs.co/api/v1/auth/';
 
   constructor(private http: HttpClient, private router: Router) {}
 
