@@ -35,6 +35,17 @@ export class StorageService {
     return null;
   }
 
+  public isActiveUser(): any {
+    const user = window.sessionStorage.getItem(USER_KEY);
+    if (user !=null) {
+      return true;
+    }
+
+    return false;
+  }
+
+  
+
   public isLoggedIn(): boolean {
     const user = window.sessionStorage.getItem(USER_KEY);
     if (user) {

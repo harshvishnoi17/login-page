@@ -22,13 +22,15 @@ export class HomeComponent  {
   ) { }
 
   ngOnInit(): void {
-
     this.user = this.storageService.getUser()
-    console.log(this.user);
   }
 
   goBack(): void {
-    
+    this.router.navigate(['/login']); 
+  }
+
+  signOut() {
+    this.storageService.clean();
     this.router.navigate(['/login']); 
   }
 }
