@@ -30,16 +30,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
             console.log("Inside AuthGuard canActivate [isLoggedIn] = ", this.storageService.isLoggedIn());
 
             if(this.storageService.isLoggedIn()) {
+               
                 return this.getProfile();
-                
-
-                if(this.router.url === "/home") {
-                    this.router.navigate(['/home']);
-                } else if(this.router.url === "/org-list") {
-                    this.router.navigate(['/org-list']);
-                } else {
-                    this.router.navigate(['/home']);
-                }
             }
             // return 
             this.router.navigate(['/login']);

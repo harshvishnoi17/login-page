@@ -16,15 +16,17 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard]},
   { path: 'signup', component: SignupComponent, canActivate: [NonAuthGuard]},
   { path: 'logout', component: LogoutComponent, canActivate: [NonAuthGuard] },
-  {     path: '',
+  {     path: 'home',
         canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
-        children: [
-            {
-                path: 'home',
-                component: HomeComponent
-            }
-        ]
-    }
+        component: HomeComponent
+    },
+    {     path: 'org-list',
+        canActivate: [AuthGuard],
+        component: OrganizationListComponent
+    },
+    {     path: '',
+        pathMatch: 'full',
+        redirectTo: "home"
+    },
 ];
 
