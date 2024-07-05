@@ -9,6 +9,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { NonAuthGuard } from './_guards/non-auth.guard';
+import { OrganizationListComponent } from './organization-list/organization-list.component';
 
 export const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,6 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [NonAuthGuard]},
   { path: 'logout', component: LogoutComponent, canActivate: [NonAuthGuard] },
   {     path: '',
-        component: HomeComponent,
         canActivate: [AuthGuard],
         canActivateChild: [AuthGuard],
         children: [

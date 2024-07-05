@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LogoutComponent } from '../logout/logout.component';
 import { StorageService } from '../_services/storage.service';
+import { NavBarComponentComponent } from '../nav-bar-component/nav-bar-component.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, NavBarComponentComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'] 
 })
