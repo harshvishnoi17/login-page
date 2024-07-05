@@ -5,11 +5,12 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, RouterModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, FormsModule, RouterModule, CommonModule, ReactiveFormsModule, NgxSpinnerModule],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'] 
 })
@@ -28,7 +29,8 @@ export class SignupComponent {
   constructor(private authService: AuthService, 
     private storageService: StorageService,
     private formBuilder: FormBuilder,
-    private router: Router) {}
+    private router: Router,
+    private spinnerService: NgxSpinnerService) {}
 
     ngOnInit(): void {
   
@@ -53,14 +55,17 @@ export class SignupComponent {
     this.errorMessage = "";
     console.log(this.signupForm.value);
     if(this.signupForm.valid) {
+      this.spinnerService.show();
       const { name, email, password, avatar } = this._v();
       this.authService.register(name, email, password, avatar).subscribe({
         next: signupData => {
             console.log(signupData);
+            this.spinnerService.hide();
         },
         error: err => {
           this.errorMessage = err.error.message;
           this.isSignupFailed = true;
+          this.spinnerService.hide();
         }
       });
     }

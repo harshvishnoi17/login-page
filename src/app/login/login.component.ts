@@ -5,12 +5,13 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../_services/storage.service';
 import { AuthService } from '../_services/auth.service';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [HttpClientModule, FormsModule, CommonModule, ReactiveFormsModule, NgxSpinnerModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'] 
 })
@@ -21,7 +22,6 @@ export class LoginComponent {
   errorMessage = '';
   roles: string[] = [];
 
-
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -29,7 +29,8 @@ export class LoginComponent {
   constructor(private authService: AuthService, 
     private storageService: StorageService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -56,12 +57,16 @@ export class LoginComponent {
     this.router.navigate(['/app-signup'])
   }
 
+  reset() {
+    this.loginForm.reset();
+  }
   onSubmit(): void {
 
     this.submitted =  true;
     this.errorMessage = "";
-    console.log(this.loginForm.valid);
+    console.log(this.loginForm);
     if(this.loginForm.valid) {
+      this.spinnerService.show(); 
       const { email, password } = this._v();
       this.authService.login(email, password).subscribe({
         next: loginData => {
@@ -75,19 +80,22 @@ export class LoginComponent {
     
               this.isLoginFailed = false;
               this.isLoggedIn = true;
-              this.roles = this.storageService.getUser().role;
-              // this.reloadPage();
+              this.spinnerService.hide(); 
               this.router.navigate(['/home']);
+              // this.toastrService.success('Success!', 'Login success!');
+
             },
             error: err => {
               this.errorMessage = err.error.message;
               this.isLoginFailed = true;
+              this.spinnerService.hide(); 
             }
           });
         },
         error: err => {
           this.errorMessage = err.error.message;
           this.isLoginFailed = true;
+          this.spinnerService.hide(); 
         }
       });
     }
