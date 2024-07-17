@@ -1,0 +1,120 @@
+<app-nav-bar-component></app-nav-bar-component>
+
+<div class="container-fluid">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+    Add User
+  </button>
+
+  <div class="modal fade" id="userModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add User</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="firstName" class="col-form-label">First Name</label>
+                <input type="text" id="firstName" class="form-control" formControlName="firstName">
+                <div *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched" class="text-danger">
+                  First Name is required
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="lastName" class="col-form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-control" formControlName="lastName">
+                <div *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched" class="text-danger">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="email" class="col-form-label">Email</label>
+                <input type="email" id="email" class="form-control" formControlName="email">
+                <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
+                  <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required</div>
+                  <div *ngIf="userForm.get('email')?.errors?.['email']">Email is invalid</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="contact" class="col-form-label">Contact</label>
+                <input type="text" id="contact" class="form-control" formControlName="contact">
+                <div *ngIf="userForm.get('contact')?.invalid && userForm.get('contact')?.touched" class="text-danger">
+                  Contact is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="currentAddress" class="col-form-label">Current Address</label>
+                <input type="text" id="currentAddress" class="form-control" formControlName="currentAddress">
+                <div *ngIf="userForm.get('currentAddress')?.invalid && userForm.get('currentAddress')?.touched" class="text-danger">
+                  Current Address is required
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="permanentAddress" class="col-form-label">Permanent Address</label>
+                <input type="text" id="permanentAddress" class="form-control" formControlName="permanentAddress">
+                <div *ngIf="userForm.get('permanentAddress')?.invalid && userForm.get('permanentAddress')?.touched" class="text-danger">
+                  Permanent Address is required
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="organizationID" class="col-form-label">Organization ID</label>
+                <input type="text" id="organizationID" class="form-control" formControlName="organizationID">
+                <div *ngIf="userForm.get('organizationID')?.invalid && userForm.get('organizationID')?.touched" class="text-danger">
+                  Organization ID is required
+                </div>
+              </div>
+              <div class="col-md-6">
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <label for="entriesPerPage">Entries per page:</label>
+    <select id="entriesPerPage" [(ngModel)]="itemsPerPage" class="form-select" style="width: auto; display: inline-block;">
+      <option *ngFor="let size of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" [value]="size">{{ size }}</option>
+    </select>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Current Address</th>
+          <th scope="col">Permanent Address</th>
+          <th scope="col">Organization ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.contact }}</td>
+          <td>{{ user.currentAddress }}</td>
+          <td>{{ user.permanentAddress }}</td>
+          <td>{{ user.organizationID }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+</div>

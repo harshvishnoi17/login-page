@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { NonAuthGuard } from './_guards/non-auth.guard';
 import { OrganizationListComponent } from './organization-list/organization-list.component';
+import { UsersComponent } from './users/users.component';
 
 export const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,5 +29,12 @@ export const routes: Routes = [
         pathMatch: 'full',
         redirectTo: "home"
     },
+    {
+        path: 'users',
+        canActivate: [AuthGuard],
+        component: UsersComponent
+    },
+    
+
 ];
 

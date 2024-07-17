@@ -1,0 +1,33 @@
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .pagination-controls button {
+    margin: 0 5px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagination-controls button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination-controls span {
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  /* organization-list.component.css */
+
+/* Optional styling for the dropdown and table */
+#entriesPerPage {
+  margin-bottom: 1rem;
+}

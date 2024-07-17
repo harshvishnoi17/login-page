@@ -31,6 +31,12 @@ export class NavBarComponentComponent {
     this.router.navigate(['/org-list']); 
   }
 
+  
+  clickUsers() {
+    this.router.navigate(['/users']); 
+  }
+
+
   signOut() {
     this.storageService.clean();
     this.router.navigate(['/login']); 
